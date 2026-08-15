@@ -70,3 +70,30 @@ window.addEventListener('scroll',()=>{
     ticking=true;
   }
 },{passive:true});
+
+// ---- roue interactive : tap sur une planète -> fiche ----
+(function(){
+  const spots = document.querySelectorAll('.wspot');
+  const cards = document.querySelectorAll('.wcard');
+  const panel = document.getElementById('wpanel');
+
+  if(!spots.length || !panel) return;
+
+  function selectPlanet(index){
+    spots.forEach(spot => {
+      spot.classList.toggle('active', spot.dataset.i === String(index));
+    });
+
+    cards.forEach(card => {
+      card.classList.toggle('show', card.dataset.i === String(index));
+    });
+
+    panel.classList.add('open');
+  }
+
+  spots.forEach(spot => {
+    spot.addEventListener('click', () => {
+      selectPlanet(spot.dataset.i);
+    });
+  });
+})();

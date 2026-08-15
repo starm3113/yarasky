@@ -144,8 +144,110 @@ section{position:relative;z-index:2;padding:70px 26px;max-width:520px;margin:0 a
 
 /* ROUE */
 .wheel-sec{text-align:center}
-.wheel-box{width:100%;max-width:360px;margin:8px auto 4px}
+.wheel-hint{font-size:13px;color:#b9b0d8;margin-bottom:14px}
+.wheel-hint i{color:#E9C77E}
+.wheel-wrap{position:relative;width:100%;max-width:360px;margin:0 auto}
+.wheel-box{width:100%;margin:0 auto}
 .wheel-box svg{width:100%;height:auto;filter:drop-shadow(0 10px 30px rgba(0,0,0,.3));background:#FFFBF3;border-radius:50%}
+
+/* zones cliquables invisibles au-dessus des planètes */
+.wspots{position:absolute;inset:0;pointer-events:none}
+.wspot{
+  position:absolute;
+  width:12%;
+  height:12%;
+  transform:translate(-50%,-50%);
+  border:none;
+  background:transparent;
+  border-radius:50%;
+  cursor:pointer;
+  pointer-events:auto;
+  padding:0;
+}
+.wspot::before{
+  content:"";
+  position:absolute;
+  inset:18%;
+  border-radius:50%;
+  border:1.5px solid rgba(233,199,126,.6);
+  opacity:0;
+  animation:wpulse 2.6s ease-in-out infinite;
+}
+.wspot::after{
+  content:"";
+  position:absolute;
+  inset:30%;
+  border-radius:50%;
+  background:rgba(233,199,126,.18);
+}
+@keyframes wpulse{
+  0%,100%{opacity:.15;transform:scale(.9)}
+  50%{opacity:.7;transform:scale(1.15)}
+}
+.wspot:hover::before,
+.wspot:focus-visible::before{opacity:.9}
+.wspot:hover::after,
+.wspot:focus-visible::after{
+  background:rgba(233,199,126,.4);
+  box-shadow:0 0 14px rgba(233,199,126,.7);
+}
+.wspot.active::after{
+  background:rgba(233,199,126,.5);
+  box-shadow:0 0 14px rgba(233,199,126,.8);
+}
+.wspot.active::before{
+  opacity:.9;
+  border-color:rgba(233,199,126,.95);
+}
+
+/* panneau d'information */
+.wpanel{
+  position:relative;
+  min-height:118px;
+  margin:18px auto 4px;
+  max-width:340px;
+  border-top:1px solid rgba(255,255,255,.12);
+  padding-top:16px;
+}
+.wpanel-empty{
+  color:#9088b8;
+  font-size:13px;
+  font-style:italic;
+  letter-spacing:1px;
+  padding:14px 0;
+}
+.wpanel.open .wpanel-empty{display:none}
+.wcard{
+  display:none;
+  text-align:center;
+  animation:wfade .5s ease;
+}
+.wcard.show{display:block}
+@keyframes wfade{
+  from{opacity:0;transform:translateY(8px)}
+  to{opacity:1;transform:none}
+}
+.wc-glyph{
+  font-family:'DejaVu Sans',serif;
+  font-size:30px;
+  color:#E9C77E;
+  line-height:1;
+  margin-bottom:6px;
+}
+.wc-title{
+  font-family:'Shrikhand';
+  font-size:19px;
+  color:#F3ECFF;
+  margin-bottom:7px;
+}
+.wc-desc{
+  font-family:'Poppins';
+  font-size:13px;
+  line-height:1.55;
+  color:#d8d0f0;
+  max-width:300px;
+  margin:0 auto;
+}
 
 /* FINALE */
 .finale{text-align:center;min-height:80vh;display:flex;flex-direction:column;align-items:center;justify-content:center}
@@ -177,6 +279,8 @@ section{position:relative;z-index:2;padding:70px 26px;max-width:520px;margin:0 a
 .letter-link{display:inline-block;color:#d8cff0;text-decoration:none;font-size:12px;letter-spacing:1px;transition:color .25s ease,transform .25s ease}
 .letter-link:hover,.letter-link:focus-visible{color:#FFE58F;transform:translateY(-2px)}
 .letter-link:focus-visible{outline:2px solid var(--sun);outline-offset:5px;border-radius:4px}
+.tatarmelle{font-family:'Shrikhand';color:#FFE58F;text-decoration:underline;text-underline-offset:1px; font-size: 22px;}
+.letter-link:hover .tatarmelle,.letter-link:focus-visible .tatarmelle{color:#fff}
 
 /* TABLETTE / DESKTOP */
 @media (min-width:768px){
